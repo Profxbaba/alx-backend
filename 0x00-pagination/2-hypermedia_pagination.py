@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-This module provides hypermedia pagination for a database of 
-popular baby names.
+This module provides hypermedia pagination for a database of baby names.
 """
 
 import csv
