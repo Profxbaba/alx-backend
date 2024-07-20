@@ -56,7 +56,7 @@ class Server:
                   - data: Actual page of the dataset.
         """
         indexed_dataset = self.indexed_dataset()
-        assert index >= 0 and index < len(indexed_dataset), "Index out of range"
+        assert index >= 0 and index < len(indexed_dataset), "Index out range"
 
         current_index = index
         next_index = current_index + page_size
