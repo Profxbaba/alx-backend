@@ -4,7 +4,8 @@ Deletion-resilient hypermedia pagination
 """
 
 import csv
-from typing import List, Dict, Any
+import math
+from typing import List, Dict  # Import Dict type from typing module
 
 
 class Server:
@@ -34,11 +35,11 @@ class Server:
             dataset = self.dataset()
             truncated_dataset = dataset[:1000]
             self.__indexed_dataset = {
-                i: truncated_dataset[i] for i in range(len(truncated_dataset))
+                i: dataset[i] for i in range(len(dataset))
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = 0, page_size: int = 10) -> Dict[str, Any]:
+    def get_hyper_index(self, index: int = 0, page_size: int = 10) -> Dict:
         """
         Returns a dictionary with pagination information and dataset page.
 
@@ -55,22 +56,22 @@ class Server:
                   - data: Actual page of the dataset.
         """
         indexed_dataset = self.indexed_dataset()
-        assert 0 <= index < len(indexed_dataset), "Index out of range."
+        assert index >= 0 and index < len(indexed_dataset), "Index out range"
 
-        page_data = []
         current_index = index
-        count = 0
+        next_index = current_index + page_size
 
-        while count < page_size and current_index < len(indexed_dataset):
-            if current_index in indexed_dataset:
-                page_data.append(indexed_dataset[current_index])
-                count += 1
-            current_index += 1
+        if next_index > len(indexed_dataset):
+            next_index = len(indexed_dataset)
 
-        next_index = current_index
+        # Retrieve page data, handling possible KeyError
+        page_data = []
+        for i in range(current_index, next_index):
+            if i in indexed_dataset:
+                page_data.append(indexed_dataset[i])
 
         return {
-            'index': index,
+            'index': current_index,
             'next_index': next_index,
             'page_size': page_size,
             'data': page_data
