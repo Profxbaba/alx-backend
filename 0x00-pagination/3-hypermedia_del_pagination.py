@@ -4,7 +4,6 @@ Deletion-resilient hypermedia pagination
 """
 
 import csv
-import math
 from typing import List, Dict, Any
 
 
@@ -56,7 +55,7 @@ class Server:
                   - data: Actual page of the dataset.
         """
         indexed_dataset = self.indexed_dataset()
-        assert 0 <= index < len(indexed_dataset), "Index is out of range."
+        assert 0 <= index < len(indexed_dataset), "Index out of range."
 
         page_data = []
         current_index = index
