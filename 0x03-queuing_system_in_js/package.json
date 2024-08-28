@@ -18,7 +18,7 @@
     "redis": "^2.8.0"
   },
   "devDependencies": {
-    "nodemon": "^2.x",
+    "nodemon": "^2.0.22",
     "@babel/cli": "^7.24.8",
     "@babel/core": "^7.25.2",
     "@babel/node": "^7.25.0",
@@ -30,7 +30,6 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.17.0",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.22",
     "request": "^2.88.0",
     "sinon": "^7.5.0"
   }
